@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.javaee.accountbook.mapper.RecordMapper">
+
+    <select id="selectTypeCostRankGt" resultType="map">
+        select type,sum(cost) cost from record
+        where cost > #{cost}
+        and time between #{startDate} and #{endDate}
+        group by type
+        order by cost desc
+    </select>
+
+    <select id="selectTypeCostRankLt" resultType="map">
+        select type,sum(cost) cost from record
+        where cost &lt; #{cost}
+          and time between #{startDate} and #{endDate}
+        group by type
+        order by cost desc
+    </select>
+
+    <select id="selectTypeCostRankEq" resultType="map">
+        select type,sum(cost) cost from record
+        where cost = #{cost}
+        and time between #{startDate} and #{endDate}
+        group by type
+        order by cost desc
+    </select>
+
+    <select id="selectSumByType" resultType="map">
+        select type,sum(cost) cost from record
+        where time between #{startDate} and #{endDate}
+        group by type
+    </select>
+
+</mapper>
